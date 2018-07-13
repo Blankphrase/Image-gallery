@@ -2,3 +2,4 @@ virtual/
 .vscode/
 *pyc
 db.sqlite3
+migrations/
