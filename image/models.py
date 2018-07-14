@@ -7,10 +7,26 @@ class Location(models.Model):
     
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+  	    
+        return self.name
+
+    def save_location(self):
+
+        self.save() 
+
 
 class Categorie(models.Model):
     
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+  	    
+        return self.name
+
+    def save_category(self):
+
+        self.save() 
 
 
 class Gallerie(models.Model):
@@ -19,25 +35,42 @@ class Gallerie(models.Model):
     
     description = models.TextField()
     
-    location = models.ForeignKey(Location, null=True)
+    Location = models.ForeignKey("Location",null=True)
     
     path = models.ImageField(upload_to = 'gallery/')
     
-    category = models.ForeignKey(Categorie, null = True)
+    Categorie = models.ForeignKey("Categorie",null=True)
     
-    pub_date = models.DateTimeField(auto_now_add=True)
-  
+    pub_date = models.DateTimeField(auto_now_add=True)  
+    
     def __str__(self):
   	    
         return self.title
 
-    def save_images(self):
+    def save_gallerie(self):
 
         self.save() 
 
-    def delete_images(self):
-        
-        self.delete()
+                                                                                                                                                                                                                                                                                                                                                                                                                           
+    @classmethod
+    def get_gallerie_by_title(cls,title):
 
+        gallerie = cls.objects.filter(title__icontains=title).all()
+
+        return gallerie
         
+    @classmethod
+    def get_gallerie_by_category(cls,category):
+        
+        gallerie = cls.objects.filter(Categorie__name__icontains=category).all()
+        
+        return gallerie
+
+    @classmethod
+    def get_gallerie_by_location(cls,location):
+        
+        gallerie = cls.objects.filter(Location__name__icontains=location).all()
+        
+        return gallerie
+
 
