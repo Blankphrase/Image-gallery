@@ -1,55 +1,51 @@
 from django.shortcuts import render,render_to_response,redirect
 from django.template.loader import render_to_string
-from .models import Gallery,Location,Category
-from django.views.decorators.csrf import csrf_exempt
+from .models import Gallerie,Location,Categorie
 import json
 
 # Create your views here.
 
 def images(request):
-    images = Gallery.objects.all()
-    categories = Category.objects.all()
+    images = Gallerie.objects.all()
+    categories = Categorie.objects.all()
     location = Location.objects.all()
 
-    return render(request,'index.html',{'images':images,'categories':categories,'location':location})
-
-# def image_by_location(request):
-#     if request.method == "GET" and 'location_name' in request.GET and request.is_ajax():
-#         location = request.GET['location_name']
-#         images_loc = Image.get_image_by_location(location)
-
-#         return render_to_response('gallery/location.html',{'images_loc':images_loc})
-
-#     return redirect(all_images)
-
-# def image_by_category(request):
-
-#     if request.method == "GET" and 'category_name' in request.GET and request.is_ajax():
-#         category = request.GET['category_name']
-#         images_cat = Image.get_image_by_cat(category)
-
-#         return render_to_response('gallery/category.html',{'images_cat':images_cat})
-
-#     return redirect(all_images)
+    return render(request,'images/index.html',{'images':images,'categories':categories,'location':location})
 
 
-# def search_image(request):
-#     categories = Category.objects.all()
-#     location = Location.objects.all()
-#     if 'image-search' in request.GET and request.GET['image-search']:
-#         search_cat = request.GET.get('image-search')
-#         images_result = Image.get_image_by_cat(search_cat)
-#         message = f'{search_cat}'
+def image_by_location(request):
+    name = Location.name
+    location = Location.objects.all()
+    category = Categorie.objects.all()
+    if 'location' in request.GET and request.GET['location']:
+        search_category = request.GET.get('location')
+        images_location = Gallerie.get_gallerie_by_location(search_category)
+        print(images_location)
+        message = f'{search_category}'
 
-#         return render(request,'gallery/search.html',{'images_result':images_result,'message':message,'categories':categories,'locations':location})
+        return render(request,'images/location.html',{'images_location':images_location,'message':message, 'name':name, 'category':category,'location':location})
+    else:
+        return render(request, 'images/location.html')
 
-#     else:
 
-#         return render(request,'gallery/search.html')
+def search_results(request):
+    category = Categorie.objects.all()
+    location = Location.objects.all()
+    if 'image' in request.GET and request.GET['image']:
+        search_category = request.GET.get('image')
+        images_result = Gallerie.get_gallerie_by_category(search_category)
+        print(images_result)
+        message = f'{search_category}'
 
-# def display_details(request,image_id):
-#     categories = Category.objects.all()
-#     location = Location.objects.all()
-#     this_image = Image.get_image_by_id(image_id)
+        return render(request,'images/search.html',{'images_result':images_result,'message':message,'category':category,'location':location})
 
-#     return render(request,'gallery/image.html',{'this_image':this_image,'categories':categories,'locations':location})
+    else:
+
+        return render(request,'images/search.html')
+
+def display_details(request,id):
+    category = Categorie.objects.all()
+    location = Location.objects.all()
+    images = Gallerie.get_gallerie_by_id(id)
+
+    return render(request,'images/SingleImage.html',{'images':images,'category':category,'location':location})
