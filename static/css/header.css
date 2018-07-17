@@ -1,0 +1,44 @@
+.scroll-category {
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 3%;
+  width: 60%;
+  text-align: center;
+  overflow-y: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-shadow: 0 0 2px 2px #d6f9b4;
+  border-radius: 0 0 22% 22%;
+  z-index: 200;
+}
+
+.scroll-category button {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border-radius: 15px/45px;
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  background: #360033;
+  background: -webkit-linear-gradient(to top, #0b8793, #360033);
+  background: linear-gradient(to top, #0b8793, #360033);
+}
+
+/* .collapse {} */
+
+@media only screen and (max-width: 700px) {
+  .scroll-category {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 3%;
+    width: 100%;
+    text-align: center;
+    overflow-y: auto;
+    overflow-x: auto;
+    white-space: nowrap;
+    box-shadow: 0 0 2px 2px #d6f9b4;
+    border-radius: 0;
+    z-index: 200;
+  }
+}
