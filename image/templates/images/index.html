@@ -1,0 +1,59 @@
+{%extends 'images/base.html'%} 
+{% block content %} 
+{{block.super}}
+
+<script>
+    function copy(ids) {
+        var textCopied = document.getElementById(ids);
+        text = textCopied.src;
+        var elementary = document.createElement("input");
+        document.body.appendChild(elementary);
+        elementary.setAttribute('value', text);
+        elementary.select();
+        document.execCommand("copy");
+        document.body.removeChild(elementary);
+        alert("Copied: " + textCopied.src);
+        }
+</script>
+
+
+<div class="container">
+    <div class="row">
+        {% for image in images %} 
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+
+            <div class="image-container">
+                <div class="thumbnail" data-image-id="{{image.id}}" data-toggle="modal" data-title="{{image.title}}" data-caption="{{image.description}}"
+                    data-image="{{image.path.url}}" data-target="#{{image.id}}">
+                    <img src="{{image.path.url}}" alt="Image" id="img{{image.id}}" class="img-thumbnail home-image" alt="{{image.description}}">
+            </div>
+                
+                <div class="modal fade" id="{{image.id}}">
+                    <div class="modal-dialog modal-dialog-centered" style="max-width: 100px!important;" role="document">
+                        <div class="modal-content">
+                            <div class="card" style="width:400px">
+                                <img class="card-img-top" src="{{ image.path.url }}" alt="Card image" style="width:100%">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <small>image name : </small>{{image.title}}</h4>
+                                        <p style="font-family: 'Lato', serif" class="card-text">description : {{image.description}}</p>
+                                        <button type="button" class="btn btn-success" onclick="copy('img{{image.id}}')">Copy Link</button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                </div>
+            {% empty %}
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <h2 class="text-center">No pics yet</h2>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

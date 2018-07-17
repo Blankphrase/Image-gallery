@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse  justify-content-between align-items-center w-100" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="/">Home
+                <span class="sr-only">(current)</span>
+            </a>
+            <a class="nav-item nav-link" href="#"></a>
+        </div>
+    </div>
+    <div class="col-sm-4 col-md-4 ml-auto">
+        <form class="navbar-form" role="search" action="{% url 'loca' %}">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Image by location " name="location">
+                <br>
+                <button class="btn btn-primary" type="submit">
+                    <i class=" glyphicon glyphicon-search"></i>
+                </button>
+                <small>categories:cars,houses,foods,phones,shoes,birds,people,space,toys</small>
+            </div>
+        </form>
+    </div>
+    <!-- Adding a search form  -->
+    <div class="col-sm-4 col-md-4 navbar-right">
+        <form class="navbar-form" role="search" action="{% url 'search_results' %}">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Image by category " name="image">
+                <br>
+                <button class="btn btn-primary" type="submit">
+                    <i class=" glyphicon glyphicon-search"></i>
+                </button>
+                <small>categories:cars,houses,foods,phones,shoes,birds,people,space,toys</small>
+            </div>
+        </form>
+    </div>
+    <!-- search form end -->
+</nav>

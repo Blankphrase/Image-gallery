@@ -1,0 +1,34 @@
+{% load bootstrap4 %} 
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+        <title>{{title}}</title>
+    {% else %}
+        <title> Gallery | Clifford </title>
+    {% endif %} 
+    {% block styles %} 
+        {% bootstrap_css %}
+    {% endblock %} 
+    {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        {% bootstrap_javascript %} 
+    {% endblock %}
+
+</head>
+
+<body style="background-color:aliceblue; width: 100%">
+    {% include 'navbar.html' %} 
+    {% block content %} 
+    
+    {%endblock%}
+
+
+
+</body>
+
+</html>
