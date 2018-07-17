@@ -53,9 +53,9 @@ class Gallerie(models.Model):
 
                                                                                                                                                                                                                                                                                                                                                                                                                            
     @classmethod
-    def get_gallerie_by_title(cls,title):
+    def get_gallerie_by_id(cls,id):
 
-        gallerie = cls.objects.filter(title__icontains=title).all()
+        gallerie = cls.objects.filter(id=id).all()
 
         return gallerie
         
